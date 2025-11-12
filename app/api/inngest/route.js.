@@ -1,68 +1,53 @@
-import { inngest } from "./inngest";
-import { connectDB } from "./db";
-import User from "@/models/user";
+import { connectDB } from "@/config/db";
+import Order from "@/models/order";
 
 /**
- * Function to save user data when a new user is created in Clerk.
+ * API route to create a new order.
+ * @param {Request} request
+ * @returns {Response}
  */
-export const syncUserCreation = inngest.createFunction(
-  { id: "sync-user-from-clerk" },       // Unique ID for this function
-  { event: "clerk/user.created" },    // The event this function listens to
-  async ({ event }) => {
-    // Get user data from the event payload
-    const { id, first_name, last_name, image_url, email_addresses } = event.data;
-
-    const userData = {
-      _id: id,
-      name: `${first_name} ${last_name}`,
-      email: email_addresses[0].email_address,
-      imageUrl: image_url,
-    };
-
-    // Connect to the database and create the new user
+export async function POST(request) {
+  try {
     await connectDB();
-    await User.create(userData);
+    const { userId, items, amount, address } = await request.json(); // <-- FIX 1: Removed extra '_'
 
-    return { message: "User created successfully" };
+    const order = await Order.create({
+      _id: Date.now().toString(), // Using timestamp as a simple unique ID
+      userId,
+      items,
+      amount,
+      address,
+      status: "Order Placed",
+      date: Date.now(),
+      // paymentMethod will be set after payment integration
+    });
+
+    return Response.json({ success: true, order });
+  } catch (error) { // <-- FIX 2: Added missing '{'
+    console.error("Error creating order:", error);
+    return Response.json({ success: false, message: error.message }, { status: 500 });
   }
-);
+}
 
 /**
- * Function to update user data when modified in Clerk.
+ * API route to fetch a user's orders.
+ * @param {Request} request
+ * @returns {Response}
  */
-export const syncUserUpdation = inngest.createFunction(
-  { id: "update-user-from-clerk" },     // Unique ID
-  { event: "clerk/user.updated" },    // Listens to the user.updated event
-  async ({ event }) => {
-    const { id, first_name, last_name, image_url, email_addresses } = event.data;
-
-    const userData = {
-      name: `${first_name} ${last_name}`,
-      email: email_addresses[0].email_address,
-      imageUrl: image_url,
-    };
-
-    // Connect to the database and update the existing user by their ID
+export async function GET(request) {
+  try {
     await connectDB();
-    await User.findByIdAndUpdate(id, userData);
+    const { searchParams } = new URL(request.url); // <-- FIX 3: Removed extra '_'
+    const userId = searchParams.get("userId");
 
-    return { message: "User updated successfully" };
+    if (!userId) {
+      return Response.json({ success: false, message: "User ID is required" }, { status: 400 });
+    }
+
+    const orders = await Order.find({ userId });
+    return Response.json({ success: true, orders });
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    return Response.json({ success: false, message: error.message }, { status: 500 });
   }
-);
-
-/**
- * Function to delete a user when deleted from Clerk.
- */
-export const syncUserDeletion = inngest.createFunction(
-  { id: "delete-user-from-clerk" },     // Unique ID
-  { event: "clerk/user.deleted" },    // Listens to the user.deleted event
-  async ({ event }) => {
-    const { id } = event.data;
-
-    // Connect to the database and delete the user by their ID
-    await connectDB();
-    await User.findByIdAndDelete(id);
-
-    return { message: "User deleted successfully" };
-  }
-);
+}
