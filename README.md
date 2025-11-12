@@ -1,6 +1,6 @@
-# QuickCart - A simple eCommerce website
+# EcoKart - A sustainable eCommerce website
 
-QuickCart is an open-source **Next.js eCommerce frontend** project.  
+EcoKart is an open-source **Next.js eCommerce frontend** project.  
 It provides a modern, fast and customizable shopping UI.  
 This repo is **frontend only** – contributors can improve the design, add new pages, animations and more.
 
@@ -21,8 +21,8 @@ This repo is **frontend only** – contributors can improve the design, add new 
 1. Clone the repo
 
     ```bash
-    git clone https://github.com/GreatStackDev/QuickCart.git
-    cd QuickCart
+    git clone https://github.com/VR-2024/E-Commerce.git
+    cd Main
     ```
 
 2. Install dependencies
@@ -66,4 +66,4 @@ This project is licensed under the **MIT License**.
 
 ## 🌟 Contributors
 
-Thanks to everyone who contributes to **QuickCart**!
+Thanks to everyone who contributes to **EcoKart**!

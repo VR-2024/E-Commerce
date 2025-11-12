@@ -10,6 +10,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "#253900",
       },
       gridTemplateColumns:{
         'auto': 'repeat(auto-fit, minmax(200px, 1fr))'

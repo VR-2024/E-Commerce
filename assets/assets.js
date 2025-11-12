@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+import logo from "./ecomart_logo.svg";
 import search_icon from "./search_icon.svg";
 import user_icon from "./user_icon.svg";
 import cart_icon from "./cart_icon.svg";
@@ -278,7 +278,7 @@ export const productsDummyData = [
 
 export const userDummyData = {
   "_id": "user_2sZFHS1UIIysJyDVzCpQhUhTIhw",
-  "name": "GreatStack",
+  "name": "EcoKart Admin",
   "email": "admin@example.com",
   "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18ycnlnUnFiUDBYT2dEZ2h1ZmRXcGlpdWV5OXoiLCJyaWQiOiJ1c2VyXzJzWkZIUzFVSUl5c0p5RFZ6Q3BRaFVoVElodyJ9",
   "cartItems": {
@@ -318,7 +318,7 @@ export const orderDummyData = [
     "address": {
       "_id": "67a1e4233f34a77b6dde9055",
       "userId": "user_2sZFHS1UIIysJyDVzCpQhUhTIhw",
-      "fullName": "GreatStack",
+      "fullName": "John Customer",
       "phoneNumber": "0123456789",
       "pincode": 654321,
       "area": "Main Road , 123 Street, G Block",
@@ -357,7 +357,7 @@ export const orderDummyData = [
     "address": {
       "_id": "67a1e4233f34a77b6dde9055",
       "userId": "user_2sZFHS1UIIysJyDVzCpQhUhTIhw",
-      "fullName": "GreatStack",
+      "fullName": "Sarah Smith",
       "phoneNumber": "0123456789",
       "pincode": 654321,
       "area": "Main Road , 123 Street, G Block",
@@ -399,7 +399,7 @@ export const orderDummyData = [
     "address": {
       "_id": "67a1e4233f34a77b6dde9055",
       "userId": "user_2sZFHS1UIIysJyDVzCpQhUhTIhw",
-      "fullName": "GreatStack",
+      "fullName": "Mike Johnson",
       "phoneNumber": "0123456789",
       "pincode": 654321,
       "area": "Main Road , 123 Street, G Block",
@@ -417,7 +417,7 @@ export const addressDummyData = [
   {
     "_id": "67a1e4233f34a77b6dde9055",
     "userId": "user_2sZFHS1UIIysJyDVzCpQhUhTIhw",
-    "fullName": "GreatStack",
+    "fullName": "EcoKart Customer",
     "phoneNumber": "0123456789",
     "pincode": 654321,
     "area": "Main Road , 123 Street, G Block",
