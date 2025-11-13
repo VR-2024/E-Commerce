@@ -14,10 +14,16 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    // This is the part that fixes your error
+    
+    // --- THIS IS THE FIX ---
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/app/*": ["app/*"],
+      "@/components/*": ["components/*"],
+      "@/config/*": ["config/*"],
+      "@/context/*": ["context/*"],
+      "@/models/*": ["models/*"],
+      "@/assets/*": ["assets/*"]
     }
   },
   "include": [
